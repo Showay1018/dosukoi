@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>ランダム抽選</title>
+
+<style>
+body {
+    font-family: sans-serif;
+    text-align: center;
+    margin-top: 100px;
+}
+
+h1 {
+    font-size: 32px;
+}
+
+.result {
+    font-size: 72px;
+    margin: 40px;
+    font-weight: bold;
+}
+
+button {
+    font-size: 24px;
+    padding: 12px 30px;
+    cursor: pointer;
+}
+</style>
+
+</head>
+<body>
+
+<h1>ランダム抽選</h1>
+
+<div class="result" id="result">？</div>
+
+<button onclick="draw()">抽選する</button>
+
+<script>
+const hiragana = [
+    "あ","い","う","え","お",
+    "か","き","く","け","こ",
+    "さ","し","す","せ","そ",
+    "た","ち","つ","て","と",
+    "な","に","ぬ","ね","の",
+    "は","ひ","ふ","へ","ほ",
+    "ま","み","む","め","も",
+    "や","ゆ","よ",
+    "ら","り","る","れ","ろ",
+    "わ"
+];
+
+// 数字の出現確率
+// 3～5 → 5%
+// 6～11 → 90%
+// 12～16 → 5%
+function getRandomNumber() {
+    const rand = Math.random();
+
+    if (rand < 0.05) {
+        return Math.floor(Math.random() * 3) + 3;
+    } else if (rand < 0.95) {
+        return Math.floor(Math.random() * 6) + 6;
+    } else {
+        return Math.floor(Math.random() * 5) + 12;
+    }
+}
+
+function draw() {
+    const kana =
+        hiragana[Math.floor(Math.random() * hiragana.length)];
+
+    const number = getRandomNumber();
+
+    document.getElementById("result").textContent =
+        `${kana}${number}`;
+}
+</script>
+
+</body>
+</html>
